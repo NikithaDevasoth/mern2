@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./style1.css">
+   
+</head>
+<body>
+    <form class="Login-from" onsubmit="login(event)">
+        <input type="username" name="" id="" class="Login-input" placeholder="username" aria-required="">
+        <input type="email" name=""  class="Login-input" id="email" placeholder="email" required>
+        <input type="password" name="" class="Login-input" id="password" placeholder="password" required>
+        <input type="submit" value="Login" class="Login-btn">
+        
+    </form>
+    <button class="login-btn" onclick="myFunction()">Clickme</button>
+    
+</body>
+<script>
+    console.log("Hello");
+    alert("Hello");
+    let x="89";
+    console.log(x);
+    x=10;
+    console.log(x);
+    x=false;
+    console.log(x);
+    x="hi";
+    console.log(x);
+    x=undefined;
+    console.log(x);
+    let obj={
+        name:"a",
+        loc:"b",
+        age:20,
+        isalive:true
+    }
+    console.log(obj.name)
+    let obj2={
+        name:"nikitha",
+        id:"22-519",/*highfens o be given as string double quotes*/
+        age:19
+
+    }
+    console.log(obj,obj2);
+    let arr=["a",obj,x,obj2]
+    console.log(arr);
+    let arr2=[1,2,3,4,5,6];
+    let arr3=[arr,"sonu",arr2];
+    console.log(arr3);
+    let arr4=[...arr,"niki",...arr2];
+    console.log(arr4)
+    console.log(arr2+arr);
+    function myFunction(){
+        console.error("hello man")
+        console.warn("hello man")
+    }
+    function login(event){
+        event.preventDefault()
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        console.log("login:"+email +" "+password);
+    }
+   
+    
+</script>
+</html>
