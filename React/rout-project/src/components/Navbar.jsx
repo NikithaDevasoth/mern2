@@ -19,7 +19,7 @@ const Navbar = () => {
         <>
             <div className='w-screen h-14 shadow-purple-500 shadow-md flex flex-row justify-center items-center'>
                 <div className='w-[40%] flex justify-start items-center font-bold text-2xl text-purple-500'>
-                    Max Store
+                    Super Store-Nikitha's Sales
                 </div>
                 <div className='w-[40%] h-full flex justify-end items-center '>
                     <div className='w-full h-full flex flex-row justify-end items-center gap-8 font-bold'>
