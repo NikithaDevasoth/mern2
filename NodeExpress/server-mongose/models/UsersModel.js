@@ -22,14 +22,14 @@ Phone:{
 },
 adress:{
     type:String,
-    required:optional
+    required:true
 },
 
 
 
 })
 const Users=mongoose.model("Users",UsersSchema)
-module.exports=mongoose
+module.exports=Users;
 //name:string:required
 //email:string:required:unique
 //phone:number:required:unique
