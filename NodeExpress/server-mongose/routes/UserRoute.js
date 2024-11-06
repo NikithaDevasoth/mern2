@@ -3,14 +3,14 @@ const Users = require('../models/UsersModel')
 const router = express.Router()
 router.get('/all', async (req, res) => {
     try {
-        const users = await users.find()//find users from db
+        const users = await Users.find()//find users from db
         res.status(200).json(users)
     } catch (error) {
         res.status(500).json({ message: error })
 
     }
 })//get method
-router.post('/add', async (req, res) => {
+router.post('/add', async (req, res) => {//post method
     try {
         const UserData = new Users(req.body)
         const { name, email, password, Phone, adress } = UserData
@@ -36,8 +36,8 @@ router.put('/edit/:id', async (req, res) => {
         if (!existinguser) {
             res.status(403).json({ message: "user not found" })
         }   
-        const updateuser = await User.findByIdAndUpdate(id, req.body, { new: true })
-        res.status(200).json({message:"the data updated successfully"})
+        const updateuser = await Users.findByIdAndUpdate(id, req.body, { new: true })
+        res.status(200).json(updateuser)
     }
     catch(error){
         res.status(500).json({message:error.message})

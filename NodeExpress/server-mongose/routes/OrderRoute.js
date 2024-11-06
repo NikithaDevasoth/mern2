@@ -34,7 +34,7 @@ router.post('/add', async (req, res) => {
                 res.status(403).json("the order not found")
             }
             const updateorder=await Orders.findByIdAndUpdate(req.body,id)
-            res.status(200).json({message:"the order succesfully updated"})
+            res.status(200).json(updateorder)
             }
             catch(error){
                 res.status(500).json({message:error.message})

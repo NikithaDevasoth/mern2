@@ -5,6 +5,7 @@ import Products from './pages/Products'
 import WebLayout from './layout/WebLayout'
 import AdminLayout from './layout/AdminLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
+import TwClasses from './pages/Admin/TwClasses'
 // import {} from 'react'
 const App = () => {
     return (
@@ -15,10 +16,13 @@ const App = () => {
                         <Route path='/' element={<Home />} />
                         <Route path='/products' element={<Products />} />
                         <Route path='/contact' element={<Contact />} />
+                        <Route path='/temp' element={<TwClasses/>}/>
                     </Route>
                     <Route element={<AdminLayout />}>
                         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
+                       
                     </Route>
+                    
                 </Routes>
             </BrowserRouter>
         </>
