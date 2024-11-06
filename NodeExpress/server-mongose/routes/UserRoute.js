@@ -1,60 +1,64 @@
 const express = require('express')
+const router = express.Router();
 const Users = require('../models/UsersModel')
-const router = express.Router()
+
 router.get('/all', async (req, res) => {
     try {
-        const users = await Users.find()//find users from db
+        const users = await Users.find()
         res.status(200).json(users)
     } catch (error) {
-        res.status(500).json({ message: error })
-
+        res.status(500).json({ message: error.message })
     }
-})//get method
-router.post('/add', async (req, res) => {//post method
+})
+
+router.post('/add', async (req, res) => {
     try {
-        const UserData = new Users(req.body)
-        const { name, email, password, Phone, adress } = UserData
-        if (!name || !email || !email || !password || !Phone || !adress) {
-            res.status(401).json({ message: "All fields are required" })
-            const storedata = await UserData.save()
-
+        const newuser = new Users(req.body)
+        const { name, email, phone, password } = newuser
+        if (!name || !email || !phone || !password) {
+            res.status(400).json({ message: "All fields required" })
         }
-        const storedata = await UserData.save()
-        res.status(201).json(storedata)
 
+        //TODO : Add User Email & Phone Validation
 
+        //Email
+
+        //Phone
+
+        await newuser.save()
+        res.status(200).json(newuser)
     } catch (error) {
         res.status(500).json({ message: error.message })
-
     }
+})
 
- })
 router.put('/edit/:id', async (req, res) => {
     try {
         const id = req.params.id
         const existinguser = await Users.findOne({ _id: id })
         if (!existinguser) {
-            res.status(403).json({ message: "user not found" })
-        }   
-        const updateuser = await Users.findByIdAndUpdate(id, req.body, { new: true })
-        res.status(200).json(updateuser)
+            res.status(404).json({ message: "User not found" })
+        }
+        const updateduser = await Users.findByIdAndUpdate(id, req.body, { new: true })
+        res.status(200).json(updateduser)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
-    catch(error){
-        res.status(500).json({message:error.message})
-    }})
-    router.delete('/delete/:id',async(req,res)=>{
-        try{
-            const id=req.params.id
-            const existinguser=await Users.findOne({_id:id})
-            if(!existinguser){
-                res.status(403).json("the user data deleted successfully")
-            }
-            await Users.findByIdAndDelete(id)
-            res.status(200).json({message:"User deleted"})
+})
+
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const existinguser = await Users.findOne({ _id: id })
+        if (!existinguser) {
+            res.status(404).json({ message: "User not found" })
         }
-        catch(error){
-            res.status(500).json({message:error.message})
-        }
-    })
-    
+        await Users.findByIdAndDelete(id)
+        res.status(200).json({ message: "User Deleted" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
+
 module.exports = router

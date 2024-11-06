@@ -14,16 +14,13 @@ password:{
     type:String,
     required:false,
 },
-Phone:{
+phone:{
    type:Number,
     required:true,
     unique:true
 
-},
-adress:{
-    type:String,
-    required:true
-},
+}
+
 
 
 
