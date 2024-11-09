@@ -1,59 +1,58 @@
-const express=require('express')
-const Orders=require('../models/OrdersModel')
-const router=express.Router()
-router.get('/all',async(req,res)=>{
-try{
-    const orders=await Orders.find()//find orders from db
-   return  res.status(200).json(orders)
-}catch(error){
-   return  res.status(500).json({message:error})
+const express = require('express')
+const router = express.Router();
+const Orders = require('../models/OrdersModel')
 
-}})//get method
+router.get('/all', async (req, res) => {
+    try {
+        const orders = await Orders.find()
+        res.status(200).json(orders)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
 router.post('/add', async (req, res) => {
     try {
-        const OrderData = new Orders(req.body)
-        const { UserId, ProductsId, OrderDate } = OrderData
-        if (!UserId || !ProductsId || !OrderDate) {
-            res.status(400).json({ message: "All fields are required" })
-            const storedata = await OrderData.save()
-
+        const neworder = new Orders(req.body)
+        const { uid, pid, total,phone, address } = neworder
+        if (!uid || !pid ||!total|| !phone || !address ) {
+            res.status(400).json({ message: "All fields required" })
         }
-        const storedata = await OrderData.save()
-       return  res.status(201).json(storedata)
-
-
+        //TODO : Add User & Product Validation 
+        await neworder.save()
+        res.status(200).json(neworder)
     } catch (error) {
-      return   res.status(500).json({ message: error.message })
+        res.status(500).json({ message: error.message })
+    }
+})
 
-    }})
-    router.put('/edit/:id',async(req,res)=>{
-        try{
-            const id=req.params.id
-            const existingorder=await Orders.findOne({_id:id})
-            if(!existingorder){
-                return res.status(403).json("the order not found")
-            }
-            const updateorder=await Orders.findByIdAndUpdate(req.body,id)
-            return  res.status(200).json(updateorder)
-            }
-            catch(error){
-              return  res.status(500).json({message:error.message})
-            }})
-            router.delete('/delete/:id',async(req,res)=>{
-                try{
-                    const id=req.params.id
-                    const existingorder=await Orders.findOne({_id:id})
-                    if(!existingorder){
-                       return  res.status(403).json({message:"the order not found"})
-                    }
-                    await Orders.findByIdAndDelete(id)
-                  return   res.status(200).json({message:"the order deleted successfully"})
+router.put('/edit/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const existingorder = await Orders.findOne({ _id: id })
+        if (!existingorder) {
+            res.status(404).json({ message: "Order not found" })
+        }
+        const updatedorder = await Orders.findByIdAndUpdate(id, req.body, { new: true })
+        res.status(200).json(updatedorder)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
 
-                }
-                catch(error){
-                   return res.status(500).json({message:error.message})
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const existingorder = await Orders.findOne({ _id: id })
+        if (!existingorder) {
+            res.status(404).json({ message: "Order not found" })
+        }
+        await Orders.findByIdAndDelete(id)
+        res.status(200).json({ message: "Order Deleted" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
 
-                }
-            })
-        
-    module.exports = router
+
+module.exports = router

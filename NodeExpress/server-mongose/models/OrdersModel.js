@@ -1,21 +1,32 @@
-const mongoose=require('mongoose')
-const { useRevalidator } = require('react-router-dom')
-const OrdersSchema=new mongoose.Schema({
-Orders:{
-    UserId:{
-        type:String,
-        required:true,
+const mongoose = require('mongoose')
 
+const OrdersSchema = new mongoose.Schema({
+    uid: {
+        type: String,
+        required: true
     },
-    ProductId:{
-        type:String,
-        required:true
+    pid: {
+        type: String,
+        required: true,
     },
-    OrderDate:{
-        type:String,
-        required:true
-    }
-}
+    total: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: Number,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    }, 
+   
+    
 })
-const Orders=mongoose.model("Orders",OrdersSchema)
-module.exports=Orders;
+
+const Orders = mongoose.model("Orders", OrdersSchema)
+
+module.exports = Orders
+
+

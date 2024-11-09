@@ -6,12 +6,12 @@ const bcrypt = require('bcrypt')
 router.post('/register', async (req, res) => {
     try {
         // const newuser = new Users(req.body)
-        const { name, email,phone, password ,adress} = req.body
-        if (!name || !email || !phone || !password||!adress) {
+        const { name, email, phone, password } = req.body
+        if (!name || !email || !phone || !password) {
             return res.status(401).json({ message: "All fields required" })
         }
 
-        //TODO : Add User Email &phone Validation
+        //TODO : Add User Email & Phone Validation
 
         //Email
         const exisitingemail = await Users.findOne({email})
@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
             return res.status(500).json({ message: `User with ${email} already exists !` })
         }
 
-        //phone
+        //Phone
         const exisitingphone = await Users.findOne({phone})
         if(exisitingphone) {
             return res.status(500).json({ message: `User with ${phone} already exists !` })
@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
         const newuser = new Users({
             name,
             email,
-           phone,
+            phone,
             password: hashedpassword
         })
         await newuser.save()
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: "All fields required" })
         }
 
-        //TODO : Add User Email &phone Validation
+        //TODO : Add User Email & Phone Validation
 
         //Email
         const user = await Users.findOne({email})
