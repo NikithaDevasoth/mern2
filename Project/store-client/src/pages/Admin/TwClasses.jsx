@@ -9,7 +9,7 @@ function TwClasses() {
         '>Hello</div>
         <div className='rounded-md p-10 border-purple-200 hover:shadow-lg hover:shadow-purple-500 hover:bg-pink-100/20 
         '>
-        Hello
+       This is Nikitha
     </div>
     </div>
   )
