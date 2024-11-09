@@ -2,7 +2,12 @@ import React from 'react'
 
 function AdminProducts() {
   return (
-    <div>AdminProducts</div>
+  <div> AdminProducts</div>
+
+  
+
+
+
   )
 }
 
