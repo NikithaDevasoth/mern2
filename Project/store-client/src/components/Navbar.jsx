@@ -21,7 +21,11 @@ const Navbar = () => {
         {
             title:'Users',
             path:'/users'
-        }
+        },
+        {
+            title:'Orders',
+            path:'/orders'
+       }
     ]
     return (
         <>

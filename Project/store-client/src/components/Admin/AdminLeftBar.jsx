@@ -11,6 +11,7 @@ const AdminLeftBar = () => {
       title: 'Products',
       path: '/admin/products'
     },
+   
     {
       title:'Settings',
       path:'admin/settings'
@@ -18,6 +19,10 @@ const AdminLeftBar = () => {
     {
       title:'Users',
       path:'admin/users'
+    },
+    {
+      title:'Orders',
+      path:'admin/orders'
     }
   ]
   return (
@@ -35,7 +40,7 @@ const AdminLeftBar = () => {
           }
         </div>
         <div className='h-[10%] w-full flex items-end'>
-          <div className=' px-8 bg-red-500 w-full h-2/3 text-white flex justify-start font-bold items-center'>
+          <div className=' px-8 bg-red-500 w-[60%] h-2/3 text-white flex justify-center  font-bold items-center'>
             Logout
           </div>
           </div>
