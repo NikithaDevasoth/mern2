@@ -1,5 +1,6 @@
 const express = require('express')
 const Products = require('../models/ProductsModel')
+const validate=require('../config/Auth')
 const router = express.Router()
 //Method:GET|API URL:localhost:3000/products/all
 

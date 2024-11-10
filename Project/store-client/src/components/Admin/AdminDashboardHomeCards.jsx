@@ -1,4 +1,4 @@
-import { DollarSign, ShoppingCart, Users } from "lucide-react"
+import { DollarSign, ShoppingBasketIcon, ShoppingCart, Users } from "lucide-react"
 import React from "react"
 import { NavLink } from 'react-router-dom'
 import Products from "../../pages/Products"
@@ -25,7 +25,7 @@ const AdminDasboardHomeCards=()=>{
                 </p>
             </div>
             <div className="w-[30%] h-full justify-center items-center">
-            <Users className="w-9 h-9"/>
+            <ShoppingBasketIcon className="w-10 h-10"/>
             </div>
             </div>
             <div className= 'w-1/4 h-[10vh] flex flex-row justify-center items-center px-2 shadow-md rounded-md'>
