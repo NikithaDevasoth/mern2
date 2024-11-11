@@ -13,9 +13,9 @@ router.get('/all', async (req, res) => {
 
 router.post('/add', async (req, res) => {
     try {
-        const newuser = new Users(req.body)
-        const { name, email, phone, password } = newuser
-        if (!name || !email || !phone || !password) {
+        const userdata = new Users(req.body)
+        const { name, email, phone, password ,role} = newuser
+        if (!name || !email || !phone || !password ||!role) {
             res.status(400).json({ message: "All fields required" })
         }
 
@@ -24,6 +24,20 @@ router.post('/add', async (req, res) => {
         //Email
 
         //Phone
+        const exisitingphone=await Users.findOne({phone})
+        if(exisitingphone){
+            return res.status(500).json({message:`User with ${phone} already exists!`})
+
+        }
+        const salt = await bcrypt.genSalt(10)
+        const hashedpassword = await bcrypt.hash(password, salt)
+        const newuser = new Users({
+            name,
+            email,
+            phone,
+            role,
+            password: hashedpassword
+        })
 
         await newuser.save()
         res.status(200).json(newuser)

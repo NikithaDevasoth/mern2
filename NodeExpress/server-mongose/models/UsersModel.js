@@ -5,7 +5,7 @@ const UsersSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    email: {                                                             
         type: String,
         required: true,
         unique:true
@@ -15,10 +15,16 @@ const UsersSchema = new mongoose.Schema({
         required: true,
         unique:true
     },
+    role:{
+        type:String,
+        required:true,
+        enum:["ADMIN","USER"]
+
+    },
     password: {
         type: String,
         required: true,
-        // unique:true
+        unique:true
     },
     password: {
         type: String,

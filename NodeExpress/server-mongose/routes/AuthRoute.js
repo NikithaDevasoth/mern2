@@ -32,6 +32,7 @@ router.post('/register', async (req, res) => {
             name,
             email,
             phone,
+            role:"USER",//Overrided in register we get default
             password: hashedpassword
         })
         await newuser.save()

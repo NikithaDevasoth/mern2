@@ -1,9 +1,12 @@
+
 import React, { useEffect, useState } from 'react'
 import AdminPageHeader from '../../components/Admin/AdminPageHeader'
 import { Loader2, Pencil, Trash, TriangleAlert } from 'lucide-react'
 import { getProducts } from '../../api/api'
 
 const AdminProducts = () => {
+ 
+
   const [products, setProducts] = useState(null)
   const [loading, setLoading] = useState(true)
 
