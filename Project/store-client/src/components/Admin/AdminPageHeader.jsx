@@ -2,7 +2,7 @@ import React from 'react'
 
 function AdminPageHeader({title}) {
   return (
-  <div className='w-full h-10 flex  justify-start items-center font-bold text-2xl text-purple-500 '>
+  <div className='w-full h-95% flex  justify-start items-center font-bold text-2xl text-purple-500 '>
    {title}
 
   </div>
