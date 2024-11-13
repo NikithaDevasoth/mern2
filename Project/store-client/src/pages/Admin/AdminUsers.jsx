@@ -11,6 +11,8 @@ const AdminUsers = () => {
   const nameRef = useRef('');
   const emailRef = useRef('');
   const phoneRef = useRef(0);
+  const passwordRef=useRef('');
+  const roleRef=useRef('');
 
 
 
@@ -32,7 +34,9 @@ const AdminUsers = () => {
     const user = {
       name: nameRef.current.value,
       email: emailRef.current.value,
-      phone: phoneRef.current.value
+      phone: phoneRef.current.value,
+   password:passwordRef.current.value,
+   role:roleRef.current.value,
     }
     try {
       const response = await addUser(user)
@@ -108,10 +112,23 @@ const AdminUsers = () => {
                 <input ref={nameRef} type="text" placeholder='Name ' className='w-full shadow-sm outline-none bg-[#f5f5f7] border-b-2 border-transparent p-4 focus:shadow-lg focus:border-purple-400 rounded-sm' required />
                 <input ref={emailRef} type="email" placeholder='Email' className='w-full shadow-sm outline-none bg-[#f5f5f7] border-b-2 border-transparent p-4 focus:shadow-lg focus:border-purple-400 rounded-sm' required />
                 <input ref={phoneRef} type="number" placeholder='Phone Number' className='w-full shadow-sm outline-none bg-[#f5f5f7] border-b-2 border-transparent p-4 focus:shadow-lg focus:border-purple-400 rounded-sm' required />
-                <button type="submit" className="w-full h-[4rem] shadow-sm bg-purple-500 text-white rounded-sm outline-none">Add User</button>
+                {/* <button type="submit" className="w-full h-[4rem] shadow-sm bg-purple-500 text-white rounded-sm outline-none">Select User</button> */}
+                <input ref={passwordRef} type="password" placeholder='Password' className='w-full shadow-sm outline-none bg-[#f5f5f7] border-b-2 border-transparent p-4 focus:shadow-lg focus:border-purple-400 rounded-sm' required />
+                <input ref={roleRef} type="number" placeholder='Role' className='w-full shadow-sm outline-none bg-[#f5f5f7] border-b-2 border-transparent p-4 focus:shadow-lg focus:border-purple-400 rounded-sm' required />
+                <div className='select h-[2rem] w-[80%]'>
+          <select name="formate" id="format" defaultValue='ADMIN'ref={roleRef}>
+            <option value='ADMIN'>Admin</option>
+            <option value='USER'>User</option>
+            </select>
+            </div>
+            <button className='w-1/2 text-left my-6 font-bold text-purple-500'>Add User</button>
+{/*             
                 <button className='h-15 w-15 border-red-500 border-2 p-1 rounded-md text-red-500 shadow-md hover:bg-red-500 hover:text-white hover:shadow-red-500' onClick={() => handleDelete(user._id)}>
-                  <Trash />
-                </button>
+                  <Trash /> </button>
+                  
+                <button className='h-15 w-15 border-blue-500 border-2 p-1 rounded-md text--500 to-blue-500 shadow-md hover:bg-blue-500 hover:text-white hover:shadow-blue-500' onClick={() => {editHelper(user)}}>
+                  <Pencil />
+                  </button> */}
               </form>
             </div>
           </div>
