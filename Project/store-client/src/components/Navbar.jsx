@@ -23,18 +23,18 @@ const Navbar = () => {
             title: 'Contact',
             path: '/contact'
         },
-        {
-            title:'Settings',
-            path:'/settings'
-        },
-        {
-            title:'Users',
-            path:'/users'
-        },
-        {
-            title:'Orders',
-            path:'/orders'
-       }
+    //     {
+    //         title:'Settings',
+    //         path:'/settings'
+    //     },
+    //     {
+    //         title:'Users',
+    //         path:'/users'
+    //     },
+    //     {
+    //         title:'Orders',
+    //         path:'/orders'
+    //    }
     ]
     const handleLogin=async(e)=>{
         e.preventDefault()

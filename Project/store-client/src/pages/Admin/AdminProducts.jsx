@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import AdminPageHeader from '../../components/Admin/AdminPageHeader';
-import { Loader2, Pencil, ShoppingBagIcon, Trash, TriangleAlert, X } from 'lucide-react';
+import { Loader2, Pencil, ShoppingBagIcon, ShoppingBasketIcon, Trash, TriangleAlert, X } from 'lucide-react';
 import { getProducts, addProduct ,deleteProduct} from '../../api/api';
 import { toast } from 'sonner';
 
@@ -69,6 +69,7 @@ const AdminProducts = () => {
     }
   }catch(errror){
     console.log(error)
+    toast.error("error while deleting")
 
   }
 
@@ -107,7 +108,7 @@ const AdminProducts = () => {
         className="h-9 w-9 flex justify-center items-center border-2 border-black rounded-full hover:border-purple-500 hover:text-purple-500 ml-4 shadow-md"
         onClick={() => setShowAdd(!showAdd)}
       >
-        <ShoppingBagIcon className="h-6 w-6" />
+        <ShoppingBasketIcon className="h-6 w-6" />
       </button>
 
       {/* Add Product Popup */}
