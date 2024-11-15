@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const Orders = require('../models/OrdersModel')
-const validate=require('../config/Auth')
-
+// const validate=require('../config/Auth')
+const {validateToken,validateTokenAdmin}=require('../config/Auth')
 
 router.get('/count', async (req, res) => {
     try {
@@ -21,7 +21,7 @@ router.get('/all', async (req, res) => {
     }
 })
 
-router.post('/add', async (req, res) => {
+router.post('/add', validateToken,async (req, res) => {
     try {
         const neworder = new Orders(req.body)
         const { uid, pid, total,phone, address } = neworder
@@ -36,7 +36,7 @@ router.post('/add', async (req, res) => {
     }
 })
 
-router.put('/edit/:id', async (req, res) => {
+router.put('/edit/:id',validateToken, async (req, res) => {
     try {
         const id = req.params.id
         const existingorder = await Orders.findOne({ _id: id })
@@ -50,7 +50,7 @@ router.put('/edit/:id', async (req, res) => {
     }
 })
 
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id',validateToken, async (req, res) => {
     try {
         const id = req.params.id
         const existingorder = await Orders.findOne({ _id: id })
@@ -62,6 +62,7 @@ router.delete('/delete/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
+    
 })
 
 

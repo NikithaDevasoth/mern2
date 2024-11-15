@@ -7,9 +7,9 @@ import { toast } from 'sonner';
 const AdminOrders = () => {
   const [orders, setOrders] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showAdd, setShowAdd] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
-  const [currentOrder, setCurrentOrder] = useState(null);
+  // const [showAdd, setShowAdd] = useState(false);
+  // const [showEdit, setShowEdit] = useState(false);
+  // const [currentOrder, setCurrentOrder] = useState(null);
 
   // References for form inputs
   const uidRef = useRef('');
@@ -30,52 +30,52 @@ const AdminOrders = () => {
     }
   }
 
-  const handleAdd = async (e) => {
-    e.preventDefault()
-    const order = {
-      uid: uidRef.current.value,
-      pid: pidRef.current.value,
-      phone: phoneRef.current.value,
-      total: totalRef.current.value
-    }
-    try {
-      const response = await addOrder(order);
-      if (response.status === 200) {
-        console.log("Order Added");
-        totalRef.success("order adedd!")
-        setShowAdd(false)
-        fetchData()
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // const handleAdd = async (e) => {
+  //   e.preventDefault()
+  //   const order = {
+  //     uid: uidRef.current.value,
+  //     pid: pidRef.current.value,
+  //     phone: phoneRef.current.value,
+  //     total: totalRef.current.value
+  //   }
+  //   try {
+  //     const response = await addOrder(order);
+  //     if (response.status === 200) {
+  //       console.log("Order Added");
+  //       totalRef.success("order adedd!")
+  //       setShowAdd(false)
+  //       fetchData()
+  //     }
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
-  const editHelper = (order) => {
-    console.log(order); // Fixed typo from `user` to `order`
-    setCurrentOrder(order);
-    setShowEdit(true); // Set showEdit to true when clicking edit
-  }
+  // const editHelper = (order) => {
+  //   console.log(order); // Fixed typo from `user` to `order`
+  //   setCurrentOrder(order);
+  //   setShowEdit(true); // Set showEdit to true when clicking edit
+  // }
 
-  const handleEdit = async (e) => {
-    e.preventDefault();
-    const order = {
-      uid: uidRef.current.value,
-      pid: pidRef.current.value,
-      phone: phoneRef.current.value,
-      total: totalRef.current.value,
-    };
-    try {
-      const response = await editOrder(order, currentOrder._id); // Fixed typo from `editProduct` to `editOrder`
-      if (response.status === 200) {
-        setShowEdit(false);
-        fetchData();
-        toast.info("Order Updated!");
-      }
-    } catch (error) {
-      toast.error("Error while updating");
-    }
-  };
+  // const handleEdit = async (e) => {
+  //   e.preventDefault();
+  //   const order = {
+  //     uid: uidRef.current.value,
+  //     pid: pidRef.current.value,
+  //     phone: phoneRef.current.value,
+  //     total: totalRef.current.value,
+  //   };
+  //   try {
+  //     const response = await editOrder(order, currentOrder._id); // Fixed typo from `editProduct` to `editOrder`
+  //     if (response.status === 200) {
+  //       setShowEdit(false);
+  //       fetchData();
+  //       toast.info("Order Updated!");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Error while updating");
+  //   }
+  // };
 
   const handleDelete = async (id) => {
     try {
@@ -125,7 +125,7 @@ const AdminOrders = () => {
       </button>
 
       {/* Add Order Popup */}
-      {showAdd && (
+      {/* {showAdd && (
         <div className="absolute top-0 left-0 z-50 h-screen w-screen flex justify-center items-center bg-black/40">
           <div className='h-1/1 w-1/3 flex flex-col justify-center items-center bg-white shadow-2xl rounded-md'>
             <div className='h-full w-full flex flex-col justify-center items-center text-lg font-semibold'>
@@ -145,10 +145,10 @@ const AdminOrders = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Edit Order Popup */}
-      {showEdit && (
+      {/* {showEdit && (
         <div className="absolute top-0 left-0 z-50 h-screen w-screen flex justify-center items-center bg-black/40">
           <div className='h-[55%] w-1/3 flex flex-col justify-center items-center bg-white shadow-2xl rounded-md'>
             <div className='h-full w-full flex flex-col justify-center items-center text-lg font-semibold'>
@@ -168,7 +168,7 @@ const AdminOrders = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       <table className='w-full h-full border-collapse border shadow-lg rounded-md'>
         <thead className='shadow-sm font-bold text-purple-500 text-left'>
@@ -188,9 +188,9 @@ const AdminOrders = () => {
               <td className='p-4'>{order.phone}</td>
               <td className='p-4'>{order.total}</td>
               <td className='p-4 flex h-full w-full flex-row justify-start items-center gap-4'>
-                <button className='h-15 w-15 border-blue-500 border-2 p-1 rounded-md text-blue-500 shadow-md hover:bg-blue-500 hover:text-white hover:shadow-blue-500' onClick={() => editHelper(order)}>
+                {/* <button className='h-15 w-15 border-blue-500 border-2 p-1 rounded-md text-blue-500 shadow-md hover:bg-blue-500 hover:text-white hover:shadow-blue-500' onClick={() => editHelper(order)}>
                   <Pencil />
-                </button>
+                </button> */}
                 <button className='h-15 w-15 border-red-500 border-2 p-1 rounded-md text-red-500 shadow-md hover:bg-red-500 hover:text-white hover:shadow-red-500' onClick={() => handleDelete(order._id)}>
                   <Trash />
                 </button>

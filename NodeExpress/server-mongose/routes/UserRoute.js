@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router();
 const Users = require('../models/UsersModel')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
+const {validateTokenAdmin}=require('../config/Auth')
 
 
 router.get('/count', async (req, res) => {

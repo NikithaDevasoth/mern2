@@ -1,10 +1,11 @@
 const express = require('express')
 const Products = require('../models/ProductsModel')
-const validate=require('../config/Auth')
+// const validate=require('../config/Auth')
+const { validateTokenAdmin } = require('../config/Auth')
 const router = express.Router()
 //Method:GET|API URL:localhost:3000/products/all
-
-router.get('/count', async (req, res) => {
+// const {validateTokenAdmin}=require('../config/Auth')
+router.get('/count',validateTkenAdmin, async (req, res) => {
     try {
         const count = await Products.countDocuments()
         return res.status(200).json({ count: count })
@@ -22,7 +23,7 @@ router.get('/all', async (req, res) => {
     }
 })//get method
 //Method:POST|API URL:localhost:3000/products/add
-router.post('/add', async (req, res) => {
+router.post('/add',validateTokenAdmin, async (req, res) => {
     try {
         const ProductData = new Products(req.body)
         const { name, img, price } = ProductData
@@ -58,7 +59,7 @@ router.put('/edit/:id',async(req,res)=>{
 
     }
 })
-router.delete('/delete/:id',async(req,res)=>{
+router.delete('/delete/:id',validateTokenAdmin,async(req,res)=>{
     try{
         const id=req.params.id
         const existingproduct=await Products.findOne({_id:id})

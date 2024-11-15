@@ -1,11 +1,26 @@
 import axios from 'axios'
+import { getToken } from '../service/Auth'
 
 const PRODUCT_API = 'http://localhost:3000/products/all'
 const USER_API = 'http://localhost:3000/users/all'
 const ORDER_API = 'http://localhost:3000/orders/all'
 const API = 'http://localhost:3000'
 //instead of above all three end points you can use const API='http://localhost:3000'
-
+const axiosInstance=axios.create({
+    baseURL:API,
+})
+axiosInstance.interceptors.request.use(
+    (config)=>{
+        const token=getToken()
+        if(token){
+            config.headers.Authorization=token
+        }
+        return config;
+    },
+    (error)=>{
+        return Promise.reject(error)
+    }
+)
 // const getUsers = () => axios.get(`${API}/users/all`) for single API can use all calls like products,users,orders
 const getProducts = () => axios.get(PRODUCT_API)
 const getUsers = () => axios.get(USER_API)
@@ -21,9 +36,9 @@ const deleteOrder = (id) => axios.delete(`${API}/orders/delete/${id}`)
 const editProduct = (product, id) => axios.put(`${API}/products/edit/${id}`, product)
 const editUser = (user, id) => axios.put(API + '/users/edit/' + id, user)
 const editOrder = (order, id) => axios.put(`{API}/orders/edit/${id}`, order)
-const getOrdersCount = () => axios.get(`${API}/orders/count`)
-const getProductsCount = () => axios.get(`${API}/products/count`)
-const getUsersCount = () => axios.get(`${API}/users/count`)
+const getOrdersCount = () =>  axiosInstance.get(`/orders/count`)
+const getProductsCount = () =>  axiosInstance.get(`/products/count`)
+const getUsersCount = () =>  axiosInstance.get(`/users/count`)
 const resetPassword = (password, id) => axios.put(`${API}/users/resetpassword/${id}`, password)
 
 
