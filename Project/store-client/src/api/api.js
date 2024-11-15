@@ -24,7 +24,7 @@ const editOrder = (order, id) => axios.put(`{API}/orders/edit/${id}`, order)
 const getOrdersCount = () => axios.get(`${API}/orders/count`)
 const getProductsCount = () => axios.get(`${API}/products/count`)
 const getUsersCount = () => axios.get(`${API}/users/count`)
-const resetPassword = (password, id) => axios.put((`${API}/users/resetpassword/${id}`, password))
+const resetPassword = (password, id) => axios.put(`${API}/users/resetpassword/${id}`, password)
 
 
 export { getProducts, getUsers, getOrders, Login, addProduct, Register, deleteProduct, addUser, deleteUser, addOrder, deleteOrder, editProduct, editOrder, editUser, getUsersCount, getProductsCount, getOrdersCount, resetPassword }
