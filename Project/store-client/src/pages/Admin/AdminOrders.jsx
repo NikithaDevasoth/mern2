@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import AdminPageHeader from '../../components/Admin/AdminPageHeader';
 import { Loader2, Pencil, ShoppingCart, Trash, TriangleAlert, X } from 'lucide-react';
-import { getOrders, addOrder, deleteOrder,editOrder } from '../../api/api';
+import { getOrders, addOrder, deleteOrder, editOrder } from '../../api/api';
 import { toast } from 'sonner';
 
 const AdminOrders = () => {
@@ -28,33 +28,34 @@ const AdminOrders = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   const handleAdd = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const order = {
       uid: uidRef.current.value,
       pid: pidRef.current.value,
       phone: phoneRef.current.value,
-      total: totalRef.current.value,
-    };
+      total: totalRef.current.value
+    }
     try {
       const response = await addOrder(order);
       if (response.status === 200) {
         console.log("Order Added");
-        setShowAdd(false);
-        fetchData();
+        totalRef.success("order adedd!")
+        setShowAdd(false)
+        fetchData()
       }
     } catch (error) {
-      console.error('Error while adding!');
+      console.error(error)
     }
-  };
+  }
 
   const editHelper = (order) => {
     console.log(order); // Fixed typo from `user` to `order`
     setCurrentOrder(order);
     setShowEdit(true); // Set showEdit to true when clicking edit
-  };
+  }
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -168,7 +169,7 @@ const AdminOrders = () => {
           </div>
         </div>
       )}
-      
+
       <table className='w-full h-full border-collapse border shadow-lg rounded-md'>
         <thead className='shadow-sm font-bold text-purple-500 text-left'>
           <tr>

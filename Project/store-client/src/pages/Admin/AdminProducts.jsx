@@ -49,7 +49,8 @@ const AdminProducts = () => {
     try {
       const response = await addProduct(product)
       if (response.status === 200) {
-        console.log("Product Added")
+        // console.log("Product Added")
+        toast.success("Product Added!")
         setShowAdd(false)
         fetchData()
       }
