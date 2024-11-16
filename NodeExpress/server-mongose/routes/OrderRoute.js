@@ -4,7 +4,7 @@ const Orders = require('../models/OrdersModel')
 // const validate=require('../config/Auth')
 const {validateToken,validateTokenAdmin}=require('../config/Auth')
 
-router.get('/count', async (req, res) => {
+router.get('/count',validateTokenAdmin, async (req, res) => {
     try {
         const count = await Orders.countDocuments()
         return res.status(200).json({ count: count })
@@ -12,7 +12,7 @@ router.get('/count', async (req, res) => {
         return res.status(500).json({ message: error.message })
     }
 })
-router.get('/all', async (req, res) => {
+router.get('/all',validateTokenAdmin, async (req, res) => {
     try {
         const orders = await Orders.find()
         res.status(200).json(orders)
@@ -36,7 +36,7 @@ router.post('/add', validateToken,async (req, res) => {
     }
 })
 
-router.put('/edit/:id',validateToken, async (req, res) => {
+router.put('/edit/:id',validateTokenAdmin, async (req, res) => {
     try {
         const id = req.params.id
         const existingorder = await Orders.findOne({ _id: id })
@@ -50,7 +50,7 @@ router.put('/edit/:id',validateToken, async (req, res) => {
     }
 })
 
-router.delete('/delete/:id',validateToken, async (req, res) => {
+router.delete('/delete/:id',validateTokenAdmin, async (req, res) => {
     try {
         const id = req.params.id
         const existingorder = await Orders.findOne({ _id: id })

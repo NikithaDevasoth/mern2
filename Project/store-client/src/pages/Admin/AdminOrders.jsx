@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import AdminPageHeader from '../../components/Admin/AdminPageHeader';
 import { Loader2, Pencil, ShoppingCart, Trash, TriangleAlert, X } from 'lucide-react';
-import { getOrders, addOrder, deleteOrder, editOrder } from '../../api/api';
+import { getOrders, addOrder, deleteOrder} from '../../api/api';
 import { toast } from 'sonner';
 
 const AdminOrders = () => {

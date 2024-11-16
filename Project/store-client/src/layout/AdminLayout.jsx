@@ -2,8 +2,9 @@ import { Outlet,useNavigate } from "react-router-dom"
 import AdminLeftBar from "../components/Admin/AdminLeftBar"
 import AdminTopBar from "../components/Admin/AdminTopBar"
 import { useEffect, useState } from "react"
-import { getRole, isLoginValid } from "../service/auth"
+// import { getRole, isLoginValid } from "../service/auth"
 import { Loader, Loader2 } from "lucide-react"
+import { getRole, isLoginValid } from "../services/auth"
 const AdminLayout = () => {
     const Navigate = useNavigate()
     const [renderAdmin, setRenderAdmin] = useState(false)

@@ -1,11 +1,10 @@
 const express = require('express')
 const Products = require('../models/ProductsModel')
 // const validate=require('../config/Auth')
-const { validateTokenAdmin } = require('../config/Auth')
 const router = express.Router()
 //Method:GET|API URL:localhost:3000/products/all
-// const {validateTokenAdmin}=require('../config/Auth')
-router.get('/count',validateTkenAdmin, async (req, res) => {
+const {validateTokenAdmin}=require('../config/Auth')
+router.get('/count',validateTokenAdmin, async (req, res) => {
     try {
         const count = await Products.countDocuments()
         return res.status(200).json({ count: count })
@@ -33,7 +32,7 @@ router.post('/add',validateTokenAdmin, async (req, res) => {
 
         }
         const storedata = await ProductData.save()
-        res.status(201).json(storedata)
+        res.status(200).json(storedata)
 
 
     } catch (error) {
@@ -42,7 +41,7 @@ router.post('/add',validateTokenAdmin, async (req, res) => {
     }
 
 })
-router.put('/edit/:id',async(req,res)=>{
+router.put('/edit/:id',validateTokenAdmin,async(req,res)=>{
     try{
         const id=req.params.id
         const existingproduct=await Products.findOne({_id:id})

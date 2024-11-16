@@ -1,15 +1,16 @@
 import { NavLink } from "react-router-dom"
-import{useState,useRef} from "react"
-import{Cross,User,X} from 'lucide-react'
-import {Login,Register} from "../api/api"
+import { useState, useRef } from "react"
+import { Cross, User, X } from 'lucide-react'
+import { Login, Register } from "../api/api"
+import { storeToken } from "../services/auth"
 
 const Navbar = () => {
-    const [showLogin,setShowLogin]=useState(false)
-    const [showRegister,setShowRegister]=useState(false)
-    const emailRef=useRef('')
-    const passwordRef=useRef('')
-    const nameRef=useRef('')
-    const phoneRef=useRef('')
+    const [showLogin, setShowLogin] = useState(false)
+    const [showRegister, setShowRegister] = useState(false)
+    const emailRef = useRef('')
+    const passwordRef = useRef('')
+    const nameRef = useRef('')
+    const phoneRef = useRef('')
     const Linksdata = [
         {
             title: 'Home',
@@ -23,75 +24,76 @@ const Navbar = () => {
             title: 'Contact',
             path: '/contact'
         },
-    //     {
-    //         title:'Settings',
-    //         path:'/settings'
-    //     },
-    //     {
-    //         title:'Users',
-    //         path:'/users'
-    //     },
-    //     {
-    //         title:'Orders',
-    //         path:'/orders'
-    //    }
+        //     {
+        //         title:'Settings',
+        //         path:'/settings'
+        //     },
+        //     {
+        //         title:'Users',
+        //         path:'/users'
+        //     },
+        //     {
+        //         title:'Orders',
+        //         path:'/orders'
+        //    }
     ]
-    const handleLogin=async(e)=>{
+    const handleLogin = async (e) => {
         e.preventDefault()
-        const credentials={
-            email:emailRef.current.value,
-            password:passwordRef.cuurent.value
+        const credentials = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value
         }
-    
-    try{
-        const response=await Login(credentials)
-        const data=await JSON.stringify(response.data)
-if(response.status===200){
-    console.log("LoginSuccess"+response.data.token)
-  }else{
-    console.log("LoginError"+data)
-}
-    }
-    catch(error){
-        console.error(error)
-    }
-    console.log(credentials)
-}
-const handleRegister = async (e) => {
-    e.preventDefault()
-    const credentials = {
-        name: nameRef.current.value,
-        phone: phoneRef.current.value,
-        email: emailRef.current.value,
-        password: passwordRef.current.value
 
+        try {
+            const response = await Login(credentials)
+            const data = await JSON.stringify(response.data)
+            if (response.status === 200) {
+                storeToken(response.data.token)
+                console.log("LoginSuccess" + response.data.token)
+            } else {
+                console.log("LoginError" + data)
+            }
+        }
+        catch (error) {
+            console.error(error)
+        }
+        console.log(credentials)
     }
-    try {
-        const response = await Register(credentials)
-        const data = await JSON.stringify(response.data)
-        if (response.status === 200) {
-            console.log("Signup Success" + data)
-            setShowRegister(false)
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        const credentials = {
+            name: nameRef.current.value,
+            phone: phoneRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value
+
+        }
+        try {
+            const response = await Register(credentials)
+            const data = await JSON.stringify(response.data)
+            if (response.status === 200) {
+                console.log("Signup Success" + data)
+                setShowRegister(false)
+                setShowLogin(true)
+            } else {
+                console.log("Signup Error" + data)
+            }
+
+        } catch (error) {
+            console.error(error)
+        }
+
+        console.log(credentials)
+    }
+    const switchAuth = () => {
+        if (showLogin) {
+            setShowLogin(false)
+            setShowRegister(true)
+        } else if (showRegister) {
             setShowLogin(true)
-        } else {
-            console.log("Signup Error" + data)
+            setShowRegister(false)
         }
-
-    } catch (error) {
-        console.error(error)
     }
-
-    console.log(credentials)
-}
-const switchAuth = () => {
-    if (showLogin) {
-        setShowLogin(false)
-        setShowRegister(true)
-    } else if (showRegister) {
-        setShowLogin(true)
-        setShowRegister(false)
-    }
-}
     return (
         <>
             <div className='w-screen h-14 shadow-purple-500 shadow-md flex flex-row justify-center items-center'>
@@ -107,13 +109,13 @@ const switchAuth = () => {
                         ))
                         }
                     </div>
-                  <button className="h-9 w-9 flex justify-center items-center border-2 border-black rounded-full hover:border-purple-500 hover:text-purple-500 ml-4 shadow-md" onClick={()=>{setShowLogin(!showLogin)}}>
-                    <User className="h-6 w-6"/>
-                  </button>
+                    <button className="h-9 w-9 flex justify-center items-center border-2 border-black rounded-full hover:border-purple-500 hover:text-purple-500 ml-4 shadow-md" onClick={() => { setShowLogin(!showLogin) }}>
+                        <User className="h-6 w-6" />
+                    </button>
 
                 </div>
             </div>
-            
+
 
             {showLogin && (
                 <div className="absolute top-0 left-0 z-50 h-screen w-screen flex justify-center items-center bg-black/40 ">
@@ -125,13 +127,13 @@ const switchAuth = () => {
                                     <X className="h-8 w-8 border-2 p-1  border-red-500 rounded-full  hover:bg-red-500 hover:text-white" />
                                 </div>
                             </div>
-                            
+
                             <form className='h-[80%] w-[80%] flex flex-col justify-center items-center gap-8' onSubmit={handleLogin}>
                                 <input ref={emailRef} type="email" name="" id="email" placeholder='Email' className='w-full shadow-sm outline-none bg-[#f5f5f7] border-b-2 border-transparent p-4 focus:shadow-lg focus:border-b-2 focus:border-purple-400 rounded-sm' required />
                                 <input ref={passwordRef} type="password" name="" id="password" placeholder='Password' className='w-full shadow-sm outline-none bg-[#f5f5f7] border-b-2 border-transparent p-4 focus:shadow-lg focus:border-b-2 focus:border-purple-400 rounded-sm' required />
                                 <button type="submit" className="w-full h-[3rem] shadow-sm bg-purple-500 text-white rounded-sm outline-none">Login</button>
-                               </form>
-                               <div className="h-[10%] w-[80%] flex justify-center items-start">
+                            </form>
+                            <div className="h-[10%] w-[80%] flex justify-center items-start">
                                 <p className="cursor-pointer text-purple-500 hover:text-purple-600" onClick={switchAuth}>Register ?</p>
                             </div>
                         </div>
@@ -139,7 +141,7 @@ const switchAuth = () => {
                 </div>
             )
             }
-                                
+
             {showRegister && (
                 <div className="absolute top-0 left-0 z-50 h-screen w-screen flex justify-center items-center bg-black/40 ">
                     <div className='h-[85%] w-1/3 flex flex-col justify-center items-center bg-white shadow-2xl rounded-md'>
@@ -163,8 +165,8 @@ const switchAuth = () => {
             )
             }
 
-    
-            
+
+
         </>
     )
 }

@@ -1,4 +1,4 @@
-import{ ShoppingBasketIcon, ShoppingCart, Users } from 'lucide-react'
+import{ ChartBar,ShoppingBasketIcon, DollarSign,ShoppingCart, Users } from 'lucide-react'
 import React from 'react'
 
 const AdminDasboardHomeCards = ({ products, orders, users }) => {
